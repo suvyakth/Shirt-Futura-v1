@@ -85,6 +85,8 @@ form.addEventListener('submit', function (event) {
         emailjs.send(service_id, template_id, templateParams).then(function(response) {
             swal("Success!", "An Email has been sent to the given email-address, please check your spam folder also.", "success");
             console.log('SUCCESS!', response.status, response.text);
+            Name = ""
+            EmailName = ""
          }, function(error) {
             console.log('FAILED...', error);
             swal("Error!", "there was an error sending the e-mail!", "error");
