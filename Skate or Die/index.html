@@ -3,14 +3,77 @@
 
 <head>
     <!-- Required meta tags -->
-   <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Shirt Futura v1</title>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css">
+   <style>
+       .jumbotron {
+    text-align: center;
+    background: none;
+}
+
+.sectionLight {
+    background-color: #eceeef;
+    padding: 2rem;
+}
+
+.sectionDark {
+    background-color: lightblue;
+    padding: 2rem;
+}
+
+.coolStuffWrapper {
+    margin-top: 20px;
+}
+
+.coolStuffBtn {
+    background-color: red;
+    color: #ffffff;
+    display: block;
+    margin: auto;
+}
+
+.modal-title {
+    margin-left: auto;
+ 
+}
+
+.modalFormWrapper {
+    padding: 2rem;
+}
+
+.imgCenter {
+  display: block;
+  margin: auto;
+}
+
+.btnCenter {
+  display: block;
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  width: 67%;
+}
+
+.carousel-control-next-icon {
+    background-color: black  !important;
+}
+
+.carousel-control-prev-icon {
+    background-color: black  !important;
+}
+p.navbar-brand{
+    word-spacing: 16cm ;
+}
+body {
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+  }
+   </style>
     <!-- <link rel="stylesheet" href="bootstrap-4.5.2-dist/css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="bootstrap-4.5.2-dist/css/bootstrap-min.css"> --->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
@@ -217,7 +280,124 @@
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
     </script>
     <!-- <script src="bundle.js"></script> -->
-    <script type="text/javascript" src="email.js"></script>
+    <script type="text/javascript" >
+    // import swal from 'sweetalert';
+var Name = document.getElementById('formName').value;
+var EmailName = document.getElementById('formEmail').value;
+var form = document.getElementById('form');
+
+
+
+// // form.addEventListener('submit', function (event) {
+// //     event.preventDefault();
+
+// //     EmailName = document.getElementById('formEmail').value;
+
+// //     alert(EmailName)
+
+// //     Email.send({
+// //         SecureToken: "0a778f3f-ecf2-4332-ae36-eef80aa74917",
+// //         To: "sukarthacharya@gmail.com",
+// //         From: "sukarthacharya@gmail.com",
+// //         Subject: 'Cool Stuff',
+// //         Body: 'Hello, ' + Name.value + 'Here is an email about cool stuff' + '                                                                                                                                                                                                                                                                                                        ' + 'Lorem ipsum dolor amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt' +
+// //             'ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation' +
+// //             'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in' +
+// //             'reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur' +
+// //             'sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id' +
+// //             'est laborum'
+// //     }).then(
+// //         message => alert(message)
+// //     );
+
+// // });
+
+// var myform = $("form#myform");
+// myform.submit(function (event) {
+//     event.preventDefault();
+
+//     // Change to your service ID, or keep using the default service
+//     var service_id = "gmail";
+//     var template_id = "cool_stuff";
+
+//     myform.find("button").text("Sending...");
+//     emailjs.sendForm(service_id, template_id, myform[0])
+//         .then(function () {
+//             alert("Sent!");
+//             myform.find("button").text("Send");
+//         }, function (err) {
+//             alert("Send email failed!\r\n Response:\n " + JSON.stringify(err));
+//             myform.find("button").text("Send");
+//         });
+//     return false;
+// });
+
+var service_id = "default_service";
+var template_id = "cool_stuff";
+
+form.addEventListener('submit', function (event) {
+
+    EmailName = document.getElementById('formEmail').value;
+    Name = document.getElementById('formName').value;
+
+    if (!EmailName || !Name) {
+        event.preventDefault();
+        console.error("Please enter values in the field");
+        swal("Missing values", "Please enter values in the field!", "warning");
+    //    Swal.fire({
+      //      icon: 'warning',
+        //    title: 'missing values',
+          //  text: 'Something went wrong!',
+            //footer: '<a href=>Why do I have this issue?</a>'
+          //})
+    } else {
+        event.preventDefault();
+        EmailName = document.getElementById('formEmail').value;
+        Name = document.getElementById('formName').value;
+
+        String(EmailName)
+        String(Name)
+
+
+
+        var templateParams = {
+            to_email: EmailName,
+            name: Name
+
+        };
+        emailjs.send(service_id, template_id, templateParams).then(function(response) {
+            swal("Success!", "An Email has been sent to the given email-address, please check your spam folder also.", "success");
+            console.log('SUCCESS!', response.status, response.text);
+         }, function(error) {
+            console.log('FAILED...', error);
+            swal("Error!", "there was an error sending the e-mail!", "error");
+         });
+        
+               
+
+    }
+
+});
+// var transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//         user: 'sukarthacharya@gmail.com',
+//         pass: 'sukarth.2008'
+//     }
+// });
+
+// var mailOptions = {
+//     from: 'sukarth',
+//     to: Email,
+//     subject: 'Cool Stuff',
+//     text: 'Hello, ' + Name.value + 'Here is an email about cool stuff' + '                                                                                                                                                                                                                                                                                                        ' + 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt' +
+//         'ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation' +
+//         'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in' +
+//         'reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur' +
+//         'sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id' +
+//         'est laborum'
+// };
+    </script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
 
     <div>
