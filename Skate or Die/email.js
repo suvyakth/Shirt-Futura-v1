@@ -1,3 +1,4 @@
+// import swal from 'sweetalert';
 var Name = document.getElementById('formName').value;
 var EmailName = document.getElementById('formEmail').value;
 var form = document.getElementById('form');
@@ -58,8 +59,14 @@ form.addEventListener('submit', function (event) {
 
     if (!EmailName || !Name) {
         event.preventDefault();
-        console.error("Please enter values in the field")
-        alert("Please enter values in the field")
+        console.error("Please enter values in the field");
+        swal("Missing values", "Please enter values in the field!", "warning");
+    //    Swal.fire({
+      //      icon: 'warning',
+        //    title: 'missing values',
+          //  text: 'Something went wrong!',
+            //footer: '<a href=>Why do I have this issue?</a>'
+          //})
     } else {
         event.preventDefault();
         EmailName = document.getElementById('formEmail').value;
@@ -76,11 +83,11 @@ form.addEventListener('submit', function (event) {
 
         };
         emailjs.send(service_id, template_id, templateParams).then(function(response) {
+            swal("Success!", "An Email has been sent to the given email-address, please check your spam folder also.", "success");
             console.log('SUCCESS!', response.status, response.text);
-            alert('An Email has been sent to the given email-address, please check your spam folder also.')
          }, function(error) {
             console.log('FAILED...', error);
-            alert('Error Sending Email')
+            swal("Error!", "there was an error sending the e-mail!", "error");
          });
         
                
@@ -88,30 +95,6 @@ form.addEventListener('submit', function (event) {
     }
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // var transporter = nodemailer.createTransport({
 //     service: 'gmail',
